@@ -1,5 +1,5 @@
-import { NavLink } from 'react-router-dom'
-import { HeaderContainer } from './styles'
+import { Link } from 'react-router-dom'
+import { Aside, HeaderContainer } from './styles'
 import { MapPin, ShoppingCart } from 'phosphor-react'
 
 export function Header() {
@@ -8,15 +8,22 @@ export function Header() {
 
   return (
     <HeaderContainer>
-      <img src={imgBase64} alt="" title="Kenko Coffee"></img>
-      <nav>
-        <NavLink to="/" title="Location">
-          <MapPin size={24} /> Itajaí
-        </NavLink>
-        <NavLink to="/checkout" title="Checkout">
-          <ShoppingCart size={24} />
-        </NavLink>
-      </nav>
+      <Link to="/">
+        <img src={imgBase64} alt="" title="Kenko Coffee"></img>
+      </Link>
+
+      <Aside>
+        <div>
+          <Link to="/" title="Location">
+            <MapPin size={22} weight="fill" />
+            <span>Itajaí, SC</span>
+          </Link>
+        </div>
+
+        <Link to="/checkout" title="Checkout">
+          <ShoppingCart size={22} weight="fill" />
+        </Link>
+      </Aside>
     </HeaderContainer>
   )
 }
