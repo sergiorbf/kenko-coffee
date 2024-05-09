@@ -1,42 +1,86 @@
 import styled from 'styled-components'
+import { TextPatterns } from '../../styles/TextPatterns'
 
-export const HomeContainer = styled.main`
-  width: 90rem;
-  margin: 5rem 0;
-  height: 34rem;
-  flex: 1;
+export const HomeContainer = styled.section`
+  position: relative;
+
+  img#hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    max-height: 544px;
+    width: 100vw;
+    object-fit: cover;
+  }
+`
+
+export const HomeContent = styled.div`
+  max-width: 1160px;
+  padding: 92px 20px;
+  margin: 0 auto;
+
   display: flex;
-  align-items: normal;
-  justify-content: left;
-  gap: 15rem;
+  gap: 56px;
+  align-items: flex-start;
+  justify-content: space-between;
 
-  img {
-    width: 29.75rem;
-    height: 22.5rem;
+  > div {
+    display: flex;
+    flex-direction: column;
+    gap: 66px;
   }
 `
 
 export const TitleContainer = styled.div`
-  font-family: 'Baloo 2', monospace;
-  h1 {
-    width: 36.75rem;
-    height: 7.75rem;
-    font-size: 2.5rem;
-    font-weight: 800;
-    margin-bottom: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  > h1 {
+    ${TextPatterns.fonts.titleXL}
+    color: ${({ theme }) => theme.colors['base-title']}
   }
 
-  h2 {
+  > span {
+    ${TextPatterns.fonts.textL}
+    color: ${({ theme }) => theme.colors['base-subtitle']}
+  }
+`
+
+export const Info = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-row-gap: 20px;
+
+  > div {
     display: flex;
-    margin-top: 0;
-    font-size: 1.5rem;
-    font-weight: 400;
-    height: 3.25rem;
+    align-items: center;
+    gap: 12px;
+
+    svg {
+      padding: 8px;
+      border-radius: 999px;
+    }
+  }
+`
+export const CoffeeList = styled.section`
+  max-width: 1160px;
+  padding: 32px 20px 150px;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: 54px;
+
+  > h2 {
+    ${TextPatterns.fonts.titleL}
+    color: ${({ theme }) => theme.colors['base-subtitle']}
   }
 
-  img {
-    margin-top: 3rem;
-    width: 35.438rem;
-    height: 5.25rem;
+  > div {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-row-gap: 40px;
+    grid-column-gap: 32px;
   }
 `
