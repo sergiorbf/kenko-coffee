@@ -14,10 +14,10 @@ export function Header() {
 
       <Aside>
         <div>
-          <Link to="/" title="Location">
-            <MapPin size={22} weight="fill" />
-            <span>Itajaí, SC</span>
-          </Link>
+          {/* <Link to="/" title="Location"> */}
+          <MapPin size={22} weight="fill" />
+          {/* </Link> */}
+          <span>Itajaí, SC</span>
         </div>
 
         <Link to="/checkout" title="Checkout">

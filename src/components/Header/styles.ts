@@ -2,9 +2,9 @@ import styled from 'styled-components'
 import { TextPatterns } from '../../styles/TextPatterns'
 
 export const HeaderContainer = styled.header`
-  max-width: 1160px;
+  max-width: 100%;
   padding: 32px 20px;
-  margin: 0 auto;
+  /* margin: 0 auto; */
 
   display: flex;
   justify-content: space-between;
@@ -20,14 +20,14 @@ export const Aside = styled.aside`
     align-items: center;
     gap: 4px;
 
-    background-color: ${({ theme }) => theme.colors['purple-light']};
+    background-color: ${({ theme }) => theme.colors['yellow-light']};
 
     svg {
-      color: ${({ theme }) => theme.colors.purple};
+      color: ${({ theme }) => theme.colors['red-japan']};
     }
 
     span {
-      color: ${({ theme }) => theme.colors['purple-dark']};
+      color: ${({ theme }) => theme.colors['red-japan']};
     }
 
     padding: 10px 8px;
