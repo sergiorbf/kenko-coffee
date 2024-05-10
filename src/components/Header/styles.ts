@@ -20,14 +20,14 @@ export const Aside = styled.aside`
     align-items: center;
     gap: 4px;
 
-    background-color: ${({ theme }) => theme.colors['yellow-light']};
+    background-color: ${({ theme }) => theme.colors['brown-light']};
 
     svg {
-      color: ${({ theme }) => theme.colors['red-japan']};
+      color: ${({ theme }) => theme.colors['brown-dark']};
     }
 
     span {
-      color: ${({ theme }) => theme.colors['red-japan']};
+      color: ${({ theme }) => theme.colors['brown-dark']};
     }
 
     padding: 10px 8px;
