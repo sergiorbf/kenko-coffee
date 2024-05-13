@@ -1,4 +1,13 @@
 import { ShoppingCart } from 'phosphor-react'
+import {
+  CartControl,
+  CoffeeImg,
+  Container,
+  Description,
+  Price,
+  Tags,
+  Title,
+} from './styles'
 
 type Props = {
   coffee: {
@@ -13,26 +22,28 @@ type Props = {
 
 export function Cards({ coffee }: Props) {
   return (
-    <div key={coffee.id}>
-      <div>
-        <img src={coffee.image} alt={coffee.title} width="100" height="100" />
-      </div>
-      <div>
+    <Container>
+      <CoffeeImg src={coffee.image} alt={coffee.title} />
+
+      <Tags>
         {coffee.tags.map((tag) => (
           <span key={tag}>{tag}</span>
         ))}
-      </div>
-      <div>
-        <h4>{coffee.title}</h4>
-      </div>
-      <div>{coffee.description}</div>
-      <div>
-        <span>R$</span>
-        <span>{coffee.price.toFixed(2)}</span>
-      </div>
+      </Tags>
+
+      <Title>{coffee.title}</Title>
+
+      <Description>{coffee.description}</Description>
+
+      <CartControl>
+        <Price>
+          <span>R$</span>
+          <span>{coffee.price.toFixed(2)}</span>
+        </Price>
+      </CartControl>
       <div>
         <ShoppingCart weight="fill" size={22} />
       </div>
-    </div>
+    </Container>
   )
 }
