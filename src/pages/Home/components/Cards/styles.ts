@@ -68,3 +68,22 @@ export const Price = styled.div`
     color: ${({ theme }) => theme.colors['base-text']};
   }
 `
+export const Order = styled.div<{ $itemAdded?: boolean }>`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  > button {
+    background-color: ${({ theme, $itemAdded }) =>
+      $itemAdded ? theme.colors['yellow-dark'] : theme.colors['red-japan']};
+    border-radius: 6px;
+    transition: background-color 0.2s;
+    padding: 8px;
+    display: flex;
+
+    &:hover {
+      background-color: ${({ theme, $itemAdded }) =>
+        $itemAdded ? theme.colors.yellow : theme.colors.red};
+    }
+  }
+`
