@@ -25,7 +25,9 @@ export const NavLinks = styled.nav`
     &:hover {
       color: ${({ theme }) => theme.colors['base-hover']};
     }
+  }
 
+  a.spotify {
     svg {
       margin-left: 4px;
       color: ${({ theme }) => theme.colors['spotify-green']};
@@ -45,11 +47,10 @@ export const Aside = styled.aside`
     background-color: ${({ theme }) => theme.colors['brown-dark']};
     padding: 10px 8px;
     border-radius: 6px;
-    transition: background-color 0.3s; /* Adicionando transição para suavizar a mudança de cor */
+    transition: background-color 0.3s;
 
     &:hover {
-      background-color: ${({ theme }) =>
-        theme.colors.brown}; /* Alterando a cor de fundo no hover */
+      background-color: ${({ theme }) => theme.colors.brown};
     }
 
     svg {
@@ -98,10 +99,8 @@ export const FranchiseButton = styled.button`
   align-items: center;
   justify-content: center;
   padding: 8px 16px;
-  background-color: ${({ theme }) =>
-    theme.colors['base-button']}; /* Cor de fundo do botão */
-  color: ${({ theme }) =>
-    theme.colors['base-text']}; /* Cor do texto do botão */
+  background-color: ${({ theme }) => theme.colors['base-button']};
+  color: ${({ theme }) => theme.colors['base-text']};
   border: none;
   border-radius: 6px;
   font-size: 16px;

@@ -35,17 +35,20 @@ export function Header() {
         <Link to="/contact" title="Contato">
           Contato
         </Link>
+        <a href="/expansion" target="_blank" rel="noreferrer">
+          <FranchiseButton type="button">
+            <FaBuilding size={22} /> Seja um franqueado
+          </FranchiseButton>
+        </a>
         <a
+          className="spotify"
           href="https://open.spotify.com/playlist/7LdIv0NxBwjUWg9s2zEKRQ?si=b374886dfe9340ed"
           target="_blank"
-          rel="noopener noreferrer"
           title="Playlist no Spotify"
+          rel="noreferrer"
         >
           <FaSpotify size={22} />
         </a>
-        <FranchiseButton type="button">
-          <FaBuilding size={22} /> Seja um franqueado
-        </FranchiseButton>
       </NavLinks>
 
       <Aside>
