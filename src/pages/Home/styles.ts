@@ -3,15 +3,6 @@ import { TextPatterns } from '../../styles/TextPatterns'
 
 export const HomeContainer = styled.section`
   position: relative;
-
-  img#hero-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    max-height: 544px;
-    width: 100vw;
-    object-fit: cover;
-  }
 `
 
 export const HomeContent = styled.div`

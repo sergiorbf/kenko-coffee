@@ -58,10 +58,8 @@ export function Home() {
             </Info>
           </div>
 
-          <img src="/images/hero.svg" alt="Café do Coffee Delivery" />
+          <img src="/images/hero.svg" alt="Café do Kenko Coffee" />
         </HomeContent>
-
-        <img src="/images/hero-bg.svg" id="hero-bg" alt="" />
       </HomeContainer>
     </div>
   )
