@@ -10,7 +10,7 @@ import {
   Title,
 } from './styles'
 import { useTheme } from 'styled-components'
-import { InputCart } from '../../../../components/Form/InputCart'
+import { InputCart } from '../../components/Form/InputCart'
 import { useState } from 'react'
 
 type Props = {

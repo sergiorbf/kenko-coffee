@@ -1,14 +1,7 @@
 import { useTheme } from 'styled-components'
-import {
-  CoffeeList,
-  HomeContainer,
-  HomeContent,
-  Info,
-  TitleContainer,
-} from './styles'
+import { HomeContainer, HomeContent, Info, TitleContainer } from './styles'
 import { Coffee, Package, ShoppingCart, Timer } from 'phosphor-react'
-import { coffees } from '../../../data.json'
-import { Cards } from './components/Cards'
+// import { Cards } from './components/Cards'
 
 export function Home() {
   const theme = useTheme()
@@ -70,15 +63,6 @@ export function Home() {
 
         <img src="/images/hero-bg.svg" id="hero-bg" alt="" />
       </HomeContainer>
-
-      <CoffeeList>
-        <h2>Nossos cafés</h2>
-        <div>
-          {coffees.map((coffee) => (
-            <Cards key={coffee.id} coffee={coffee} />
-          ))}
-        </div>
-      </CoffeeList>
     </div>
   )
 }

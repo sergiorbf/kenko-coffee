@@ -1,5 +1,5 @@
 import { styled } from 'styled-components'
-import { TextPatterns } from '../../../../styles/TextPatterns'
+import { TextPatterns } from '../../styles/TextPatterns'
 
 export const Container = styled.div`
   background-color: ${({ theme }) => theme.colors['base-card']};
