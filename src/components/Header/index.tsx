@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
-import { Aside, HeaderContainer } from './styles'
+import { Aside, FranchiseButton, HeaderContainer, NavLinks } from './styles'
 import { MapPin, ShoppingCart } from 'phosphor-react'
+import { FaSpotify, FaBuilding } from 'react-icons/fa'
 
 export function Header() {
   const imgBase64: string =
@@ -12,11 +13,35 @@ export function Header() {
         <img src={imgBase64} alt="" title="Kenko Coffee"></img>
       </Link>
 
+      <NavLinks>
+        <Link to="/" title="Início">
+          Início
+        </Link>
+        <Link to="/menu" title="Cardápio">
+          Cardápio
+        </Link>
+        <Link to="/about" title="Sobre Nós">
+          Sobre Nós
+        </Link>
+        <Link to="/contact" title="Contato">
+          Contato
+        </Link>
+        <a
+          href="https://open.spotify.com/playlist/7LdIv0NxBwjUWg9s2zEKRQ?si=b374886dfe9340ed"
+          target="_blank"
+          rel="noopener noreferrer"
+          title="Playlist no Spotify"
+        >
+          <FaSpotify size={22} />
+        </a>
+        <FranchiseButton type="button">
+          <FaBuilding size={22} /> Seja um franqueado
+        </FranchiseButton>
+      </NavLinks>
+
       <Aside>
         <div>
-          {/* <Link to="/" title="Location"> */}
           <MapPin size={22} weight="fill" />
-          {/* </Link> */}
           <span>Itajaí, SC</span>
         </div>
 

@@ -12,13 +12,16 @@ export const defaultTheme = {
     'base-title': '#272221',
 
     'purple-light': '#EBE5F9',
+    'red-light': '#CD5C5C',
     'red-japan': '#AB222E',
-    'red-700': '#7A1921',
+    red: '#7A1921',
 
     'yellow-light': '#F1E9C9',
     yellow: '#DBAC2C',
     'yellow-dark': '#C47F17',
     'brown-light': '#bca89f',
+    brown: '#331800',
     'brown-dark': '#4c3228',
+    'spotify-green': '#1DB954',
   },
 }

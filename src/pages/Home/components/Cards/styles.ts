@@ -3,24 +3,25 @@ import { TextPatterns } from '../../../../styles/TextPatterns'
 
 export const Container = styled.div`
   background-color: ${({ theme }) => theme.colors['base-card']};
-  padding: 20px;
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
+  padding: 0 20px 20px;
+  border-radius: 6px 36px;
+  width: 256px;
 
   display: flex;
   flex-direction: column;
+
   text-align: center;
 `
 export const CoffeeImg = styled.img`
-  align-self: center;
+  margin-top: -20px;
   max-width: 120px;
   max-height: 120px;
+  align-self: center;
 `
 export const Tags = styled.div`
-  display: flex;
-
   margin-top: 12px;
+
+  display: flex;
   align-items: center;
   align-self: center;
   gap: 4px;
@@ -28,10 +29,10 @@ export const Tags = styled.div`
   span {
     padding: 4px 8px;
     border-radius: 100px;
-    ${TextPatterns.fonts.tag}
-    text-transform: uppercase;
     background-color: ${({ theme }) => theme.colors['yellow-light']};
     color: ${({ theme }) => theme.colors['yellow-dark']};
+    text-transform: uppercase;
+    ${TextPatterns.fonts.tag}
   }
 `
 export const Title = styled.h3`
@@ -75,15 +76,30 @@ export const Order = styled.div<{ $itemAdded?: boolean }>`
 
   > button {
     background-color: ${({ theme, $itemAdded }) =>
-      $itemAdded ? theme.colors['yellow-dark'] : theme.colors['red-japan']};
+      $itemAdded ? theme.colors['yellow-dark'] : theme.colors['brown-dark']};
+    transition:
+      background-color 0.2s ease,
+      transform 0.2s ease;
     border-radius: 6px;
-    transition: background-color 0.2s;
     padding: 8px;
     display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
 
     &:hover {
       background-color: ${({ theme, $itemAdded }) =>
-        $itemAdded ? theme.colors.yellow : theme.colors.red};
+        $itemAdded ? theme.colors.yellow : theme.colors.brown};
+      transform: scale(1.05);
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+
+    svg {
+      transition: color 0.2s ease;
     }
   }
 `
