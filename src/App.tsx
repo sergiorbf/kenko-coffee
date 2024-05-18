@@ -5,16 +5,16 @@ import { BrowserRouter } from 'react-router-dom'
 import { defaultTheme } from './styles/themes/default'
 import { GlobalStyle } from './styles/global'
 import { Router } from './Router'
-// import { MarketContextProvider } from './contexts/MarketContext'
+import { MarketContextProvider } from './contexts/MarketContext'
 
 export function App() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <GlobalStyle />
       <BrowserRouter>
-        {/* <MarketContextProvider> */}
-        <Router />
-        {/* </MarketContextProvider> */}
+        <MarketContextProvider>
+          <Router />
+        </MarketContextProvider>
       </BrowserRouter>
     </ThemeProvider>
   )
