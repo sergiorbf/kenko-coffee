@@ -3,9 +3,12 @@ import { Aside, FranchiseButton, HeaderContainer, NavLinks } from './styles'
 import { MapPin, ShoppingCart } from 'phosphor-react'
 import { FaSpotify, FaBuilding } from 'react-icons/fa'
 import { useEffect, useState } from 'react'
+import { useCart } from '../../Hooks/useCart'
 
 export function Header() {
   const [imgBase64, setImgBase64] = useState('')
+
+  const { cart } = useCart()
 
   useEffect(() => {
     const fetchBase64Image = async () => {
@@ -57,8 +60,9 @@ export function Header() {
           <span>Itajaí, SC</span>
         </div>
 
-        <Link to="/checkout" title="Checkout">
+        <Link to="/checkout" aria-disabled={cart.length === 0} title="Checkout">
           <ShoppingCart size={22} weight="fill" />
+          {cart.length > 0 ? <span>{cart.length}</span> : null}
         </Link>
       </Aside>
     </HeaderContainer>

@@ -36,6 +36,11 @@ export const TitleContainer = styled.div`
     ${TextPatterns.fonts.textL}
     color: ${({ theme }) => theme.colors['base-subtitle']}
   }
+
+  > h2 {
+    ${TextPatterns.fonts.textL}
+    color: ${({ theme }) => theme.colors['base-subtitle']}
+  }
 `
 
 export const Info = styled.div`

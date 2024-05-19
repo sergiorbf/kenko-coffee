@@ -1,6 +1,6 @@
 import { useContext } from 'react'
-import { MarketContextProvider } from '../contexts/MarketContext'
+import { MarketContext } from '../contexts/MarketContext'
 
 export function useCart() {
-  return useContext(MarketContextProvider)
+  return useContext(MarketContext)
 }

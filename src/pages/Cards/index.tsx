@@ -11,7 +11,8 @@ import {
 } from './styles'
 import { useTheme } from 'styled-components'
 import { InputCart } from '../../components/Form/InputCart'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useCart } from '../../Hooks/useCart'
 
 type Props = {
   coffee: {
@@ -28,7 +29,7 @@ export function Cards({ coffee }: Props) {
   const [isItemAdded, setIsItemAdded] = useState(false)
   const theme = useTheme()
   const [quantity, setQuantity] = useState(1)
-  // const { addItem } = useCart()
+  const { addItem } = useCart()
 
   function incrementQuantity() {
     setQuantity((state) => state + 1)
@@ -41,9 +42,25 @@ export function Cards({ coffee }: Props) {
   }
 
   function handleAddItem() {
+    addItem({ id: coffee.id, quantity })
     setIsItemAdded(true)
     setQuantity(1)
   }
+
+  useEffect(() => {
+    let timeout: number
+
+    if (isItemAdded) {
+      timeout = setTimeout(() => {
+        setIsItemAdded(false)
+      }, 1000)
+    }
+    return () => {
+      if (timeout) {
+        clearTimeout(timeout)
+      }
+    }
+  }, [isItemAdded])
 
   return (
     <Container>
