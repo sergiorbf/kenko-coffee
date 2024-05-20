@@ -4,6 +4,7 @@ import { TextPatterns } from '../../styles/TextPatterns'
 export const Container = styled.div`
   position: relative;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
   padding: 20px;
@@ -22,6 +23,10 @@ export const Container = styled.div`
     background: rgba(0, 0, 0, 0.5);
     z-index: 1;
   }
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
 `
 
 export const LeftWrapper = styled.div`
@@ -31,6 +36,12 @@ export const LeftWrapper = styled.div`
   flex: 1;
   z-index: 2;
   margin-left: 5rem;
+
+  @media (max-width: 768px) {
+    margin-left: 0;
+    align-items: center;
+    text-align: center;
+  }
 `
 export const TextWrapper = styled.div`
   margin-top: 20px;
@@ -47,19 +58,35 @@ export const TextWrapper = styled.div`
     color: ${({ theme }) => theme.colors['yellow-light']};
     text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
   }
+
+  @media (max-width: 768px) {
+    > h1,
+    > p {
+      ${TextPatterns.fonts.titleL}
+    }
+  }
 `
 export const FormWrapper = styled.div`
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   flex-direction: column;
   z-index: 2;
   margin-left: 20px;
+  flex: 1;
+
+  @media (max-width: 768px) {
+    margin-left: 0;
+    width: 100%;
+    padding: 0 20px;
+  }
 `
+
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  width: 500px;
+  width: 100%;
+  max-width: 500px;
   padding: 20px;
   background-color: ${({ theme }) => theme.colors['yellow-light']};
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -68,6 +95,10 @@ export const Form = styled.form`
   > h4 {
     ${TextPatterns.fonts.titleL}
     color: ${({ theme }) => theme.colors['base-subtitle']}
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
   }
 `
 
@@ -98,6 +129,7 @@ export const FormGroup = styled.div`
   font-size: ${TextPatterns.fonts.textL};
   color: ${({ theme }) => theme.colors['base-subtitle']};
 `
+
 export const AdditionalContent = styled.div`
   position: absolute;
   top: 100%;
@@ -106,7 +138,13 @@ export const AdditionalContent = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
+
+  @media (max-width: 768px) {
+    position: static;
+    padding: 20px 0;
+  }
 `
+
 export const Card = styled.div`
   width: 300px;
   background-color: white;
@@ -140,5 +178,39 @@ export const Icon = styled.div`
 
   svg {
     fill: ${({ theme }) => theme.colors.yellow};
+  }
+`
+
+export const SelectWrapper = styled.div`
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 10px;
+
+  &::after {
+    content: '▼';
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: ${({ theme }) => theme.colors['brown-dark']};
+  }
+`
+
+export const StyledSelect = styled.select`
+  width: 100%;
+  padding: 10px;
+  padding-right: 30px;
+  border: 1px solid ${({ theme }) => theme.colors['brown-light']};
+  border-radius: 4px;
+  color: ${({ theme }) => theme.colors['brown-dark']};
+  font-size: ${TextPatterns.fonts.textL};
+  appearance: none;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+    border-color: ${({ theme }) => theme.colors['yellow-dark']};
   }
 `

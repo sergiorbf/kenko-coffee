@@ -1,4 +1,3 @@
-// Aqui estará o código JSX que você já possui até agora
 import { useEffect, useState } from 'react'
 import {
   Container,
@@ -12,6 +11,8 @@ import {
   AdditionalContent,
   Icon,
   Card,
+  StyledSelect,
+  SelectWrapper,
 } from './styles'
 import { FaHome, FaBuilding, FaMapMarkedAlt } from 'react-icons/fa'
 export function Expansion() {
@@ -58,15 +59,47 @@ export function Expansion() {
           </FormGroup>
           <FormGroup>
             <label>Cidade:</label>
-            <Input type="text" name="city" />
+            <SelectWrapper>
+              <StyledSelect id="city" name="city">
+                <option value="" disabled selected>
+                  Selecione
+                </option>
+                <option value="Itajaí">Itajaí, SC</option>
+                <option value="Balneário Camboriú">
+                  Balneário Camboriú, SC
+                </option>
+              </StyledSelect>
+            </SelectWrapper>
           </FormGroup>
           <FormGroup>
-            <label>Qual capital para investimento:</label>
-            <Input type="text" name="capital" />
+            <label htmlFor="capital">Qual capital para investimento:</label>
+            <SelectWrapper>
+              <StyledSelect id="capital" name="capital">
+                <option value="" disabled selected>
+                  Selecione
+                </option>
+                <option value="240">A partir de 240mil reais</option>
+                <option value="570">A partir de 570mil reais</option>
+              </StyledSelect>
+            </SelectWrapper>
           </FormGroup>
           <FormGroup>
-            <label>Qual a sua ocupação atual:</label>
-            <Input type="text" name="occupation" />
+            <label htmlFor="occupation">Qual a sua ocupação atual:</label>
+            <SelectWrapper>
+              <StyledSelect id="occupation" name="occupation">
+                <option value="" disabled selected>
+                  Selecione
+                </option>
+                <option value="Empreendedor/Empresário">
+                  Empreendedor/Empresário
+                </option>
+                <option value="Funcionário CLT">Funcionário CLT</option>
+                <option value="Funcionário Público">Funcionário Público</option>
+                <option value="Aposentado">Aposentado</option>
+                <option value="Investidor">Investidor</option>
+                <option value="Outro">Outro</option>
+              </StyledSelect>
+            </SelectWrapper>
           </FormGroup>
           <Button type="submit">Quero saber mais</Button>
         </Form>
@@ -76,15 +109,15 @@ export function Expansion() {
           <Icon>
             <FaHome size={80} />
           </Icon>
-          <h4>+900 Franquias</h4>
-          <p>Somos mais de 900 franquias espalhadas em todos os estados.</p>
+          <h4>+660 Franquias</h4>
+          <p>Somos mais de 660 franquias espalhadas em todos os estados.</p>
         </Card>
         <Card>
           <Icon>
             <FaBuilding size={80} />
           </Icon>
-          <h4>+ 280 Cidades</h4>
-          <p>Nossa rede já possui franquias em mais de 280 cidades.</p>
+          <h4>+ 275 Cidades</h4>
+          <p>Nossa rede já possui franquias em mais de 275 cidades.</p>
         </Card>
         <Card>
           <Icon>

@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { Container, InfoContainer } from './styles'
 
 const newOrder = z.object({
   zipCode: z.number({ invalid_type_error: 'Informe o CEP' }),
@@ -14,3 +15,11 @@ const newOrder = z.object({
 })
 
 export type OrderInfo = z.infer<typeof newOrder>
+
+export function Cart() {
+  return (
+    <Container>
+      <InfoContainer>a</InfoContainer>
+    </Container>
+  )
+}
