@@ -9,8 +9,23 @@ import {
   PaymentHeading,
   PaymentOptions,
 } from './styles'
-import { MapPin, CurrencyDollar } from '@phosphor-icons/react'
+import { MapPin, CurrencyDollar, CreditCard } from '@phosphor-icons/react'
 import { TextInput } from '../../components/Form/TextInput'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import { useCart } from '../../Hooks/useCart'
+import { Radio } from '../../components/Form/Radio'
+
+type FormInputs = {
+  cep: number
+  street: string
+  number: string
+  fullAddress: string
+  neighborhood: string
+  city: string
+  state: string
+  paymentMethod: 'credit' | 'debit' | 'cash' | 'pix'
+}
 
 const newOrder = z.object({
   zipCode: z.number({ invalid_type_error: 'Informe o CEP' }),
@@ -28,12 +43,50 @@ const newOrder = z.object({
 export type OrderInfo = z.infer<typeof newOrder>
 
 export function Cart() {
+  const {
+    cart,
+    checkout,
+    incrementItemQuantity,
+    decrementItemQuantity,
+    removeItem,
+  } = useCart()
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<FormInputs>({
+    resolver: zodResolver(newOrder),
+  })
+
+  const selectedPaymentMethod = watch('paymentMethod')
+
+  function handleItemIncrement(itemId: string) {
+    incrementItemQuantity(itemId)
+  }
+
+  function handleItemDecrement(itemId: string) {
+    decrementItemQuantity(itemId)
+  }
+
+  function handleItemRemove(itemId: string) {
+    removeItem(itemId)
+  }
+
+  const handleOrderCheckout: SubmitHandler<FormInputs> = (data) => {
+    if (cart.length === 0) {
+      return alert('É preciso ter pelo menos um item no carrinho')
+    }
+    checkout(data)
+  }
+
   return (
     <Container>
       <InfoContainer>
         <h2>Complete seu pedido</h2>
 
-        <form id="order">
+        <form id="order" onSubmit={handleSubmit(handleOrderCheckout)}>
           <AddressContainer>
             <AddressHeading>
               <MapPin size={22} />
@@ -45,13 +98,51 @@ export function Cart() {
             </AddressHeading>
 
             <AddressForm>
-              <TextInput placeholder="CEP" type="number" />
-              <TextInput placeholder="Rua" />
-              <TextInput placeholder="Número" />
-              <TextInput placeholder="Complemento" />
-              <TextInput placeholder="Bairro" />
-              <TextInput placeholder="Cidade" />
-              <TextInput placeholder="UF" />
+              <TextInput
+                placeholder="CEP"
+                type="number"
+                containerProps={{ style: { gridArea: 'cep' } }}
+                error={errors.cep}
+                {...register('cep', { valueAsNumber: true })}
+              />
+              <TextInput
+                placeholder="Rua"
+                containerProps={{ style: { gridArea: 'street' } }}
+                error={errors.street}
+                {...register('street')}
+              />
+              <TextInput
+                placeholder="Número"
+                containerProps={{ style: { gridArea: 'number' } }}
+                error={errors.number}
+                {...register('number')}
+              />
+              <TextInput
+                placeholder="Complemento"
+                optional
+                containerProps={{ style: { gridArea: 'fullAddress' } }}
+                error={errors.fullAddress}
+                {...register('fullAddress')}
+              />
+              <TextInput
+                placeholder="Bairro"
+                containerProps={{ style: { gridArea: 'neighborhood' } }}
+                error={errors.neighborhood}
+                {...register('neighborhood')}
+              />
+              <TextInput
+                placeholder="Cidade"
+                containerProps={{ style: { gridArea: 'city' } }}
+                error={errors.city}
+                {...register('city')}
+              />
+              <TextInput
+                placeholder="UF"
+                maxLength={2}
+                containerProps={{ style: { gridArea: 'state' } }}
+                error={errors.state}
+                {...register('state')}
+              />
             </AddressForm>
           </AddressContainer>
 
@@ -70,7 +161,16 @@ export function Cart() {
             </PaymentHeading>
 
             <PaymentOptions>
-              <div></div>
+              <div>
+                <Radio
+                  isSelected={selectedPaymentMethod === 'credit'}
+                  {...register('paymentMethod')}
+                  value="credit"
+                >
+                  <CreditCard size={16} />
+                  <span>Cartão de crédito</span>
+                </Radio>
+              </div>
             </PaymentOptions>
           </PaymentContainer>
         </form>
