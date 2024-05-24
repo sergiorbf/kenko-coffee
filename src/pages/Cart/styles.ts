@@ -78,3 +78,12 @@ export const PaymentOptions = styled.div`
     gap: 0.75rem;
   }
 `
+export const Coffee = styled.div`
+  display: flex;
+`
+export const CartTotal = styled.div`
+  width: 100%;
+`
+export const CartTotalInfo = styled.div`
+  display: flex;
+`

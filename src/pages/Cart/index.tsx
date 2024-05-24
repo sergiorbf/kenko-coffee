@@ -1,8 +1,11 @@
 import { z } from 'zod'
+import { Fragment } from 'react'
 import {
   AddressContainer,
   AddressForm,
   AddressHeading,
+  CartTotal,
+  Coffee,
   Container,
   InfoContainer,
   PaymentContainer,
@@ -15,6 +18,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useCart } from '../../Hooks/useCart'
 import { Radio } from '../../components/Form/Radio'
+import { coffees } from '../../../data.json'
 
 type FormInputs = {
   cep: number
@@ -50,6 +54,19 @@ export function Cart() {
     decrementItemQuantity,
     removeItem,
   } = useCart()
+
+  const coffeesInCart = cart.map((item) => {
+    const coffeeInfo = coffees.find((coffee) => coffee.id === item.id)
+
+    if (!coffeeInfo) {
+      throw new Error('Invalid coffee.')
+    }
+
+    return {
+      ...coffeeInfo,
+      quantity: item.quantity,
+    }
+  })
 
   const {
     register,
@@ -179,6 +196,18 @@ export function Cart() {
       <InfoContainer>
         <h2>Cafés selecionados</h2>
       </InfoContainer>
+
+      <CartTotal>
+        {coffeesInCart.map((coffee) => (
+          <Fragment key={coffee.id}>
+            <Coffee>
+              <div>
+                <img src={coffee.image} alt={coffee.title} />
+              </div>
+            </Coffee>
+          </Fragment>
+        ))}
+      </CartTotal>
     </Container>
   )
 }
