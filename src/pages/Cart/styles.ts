@@ -13,6 +13,17 @@ export const InfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
+
+  h2 {
+    ${TextPatterns.fonts.titleXS}
+    color: ${({ theme }) => theme.colors['base-subtitle']}
+  }
+
+  > form {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
 `
 export const FormsContainer = styled.div`
   padding: 40px;
@@ -25,6 +36,8 @@ export const FormsContainer = styled.div`
   flex-direction: column;
   gap: 2rem;
 `
+
+export const AddressContainer = styled(FormsContainer)``
 
 export const Heading = styled.div`
   display: flex;
@@ -41,8 +54,6 @@ export const Heading = styled.div`
   }
 `
 
-export const AddressContainer = styled(FormsContainer)``
-
 export const AddressHeading = styled(Heading)`
   svg {
     color: ${({ theme }) => theme.colors['yellow-dark']};
@@ -50,14 +61,13 @@ export const AddressHeading = styled(Heading)`
 `
 export const AddressForm = styled.div`
   display: grid;
-  grid-gap: 2rem 0.75rem;
-  grid-template-columns: 12.5rem 1fr 3.75;
-
-  grid-template-columns:
-    'cep . .'
+  grid-template-areas:
+    'zipCode . .'
     'street street street'
     'number fullAddress fullAddress'
     'neighborhood city state';
+  grid-template-columns: 12.5rem 1fr 3.75rem;
+  grid-gap: 2rem 0.75rem;
 `
 export const PaymentContainer = styled(FormsContainer)``
 
@@ -80,10 +90,90 @@ export const PaymentOptions = styled.div`
 `
 export const Coffee = styled.div`
   display: flex;
+  justify-content: space-between;
+
+  > div {
+    > img {
+      width: 4rem;
+      height: 4rem;
+    }
+
+    display: flex;
+    align-items: stretch;
+    gap: 1.25rem;
+
+    > div {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  }
+
+  > aside {
+    font-weight: bold;
+  }
 `
 export const CartTotal = styled.div`
   width: 100%;
+  padding: 2.5rem;
+  border-radius: 0.375rem 2.25rem;
+  background-color: ${({ theme }) => theme.colors['base-card']};
+  min-width: 28rem;
+
+  > span {
+    display: block;
+    height: 1px;
+    background-color: ${({ theme }) => theme.colors['base-button']};
+    margin: 1.5rem 0;
+  }
 `
 export const CartTotalInfo = styled.div`
   display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    span:first-child {
+      ${TextPatterns.fonts.textS}
+    }
+
+    span:last-child {
+      ${TextPatterns.fonts.textM}
+    }
+  }
+
+  div:last-child {
+    span {
+      ${TextPatterns.fonts.textL};
+      font-weight: bold;
+    }
+  }
+`
+export const CoffeeInfo = styled.div`
+  display: flex;
+`
+export const CheckoutButton = styled.button`
+  width: 100%;
+  text-transform: uppercase;
+  ${TextPatterns.fonts.buttonG}
+  transition: all 0.2s;
+  padding: 0.75rem;
+  border-radius: 0.375rem;
+  margin-top: 1.5rem;
+  cursor: pointer;
+  color: ${({ theme }) => theme.colors.white};
+  background-color: ${({ theme }) => theme.colors.yellow};
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors['yellow-dark']};
+  }
+`
+export const PaymentErrorMessage = styled.p`
+  ${TextPatterns.fonts.textXS}
+  font-weight: 400;
+  color: red;
 `
