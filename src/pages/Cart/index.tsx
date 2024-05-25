@@ -117,6 +117,12 @@ export function Cart() {
     checkout(data)
   }
 
+  // const [addressData, setAddressData] = useState({})
+
+  // const handleAddressChange = (data) => {
+  //   setAddressData(data)
+  // }
+
   return (
     <Container>
       <InfoContainer>
@@ -140,6 +146,7 @@ export function Cart() {
                 containerProps={{ style: { gridArea: 'zipCode' } }}
                 error={errors.zipCode}
                 {...register('zipCode', { valueAsNumber: true })}
+                isZipCode={true}
               />
 
               <TextInput
@@ -151,6 +158,7 @@ export function Cart() {
 
               <TextInput
                 placeholder="Número"
+                type="number"
                 containerProps={{ style: { gridArea: 'number' } }}
                 error={errors.number}
                 {...register('number')}
