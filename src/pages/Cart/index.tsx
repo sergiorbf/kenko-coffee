@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 import {
   AddressContainer,
   AddressForm,
@@ -25,7 +25,7 @@ import {
   Money,
   PixLogo,
 } from '@phosphor-icons/react'
-import { TextInput } from '../../components/Form/TextInput'
+import { TextInput, ZipCodeProps } from '../../components/Form/TextInput'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useCart } from '../../Hooks/useCart'
@@ -85,6 +85,7 @@ export function Cart() {
     register,
     handleSubmit,
     watch,
+    setValue,
     formState: { errors },
   } = useForm<FormInputs>({
     resolver: zodResolver(newOrder),
@@ -117,11 +118,15 @@ export function Cart() {
     checkout(data)
   }
 
-  // const [addressData, setAddressData] = useState({})
+  const [addressData, setAddressData] = useState({})
 
-  // const handleAddressChange = (data) => {
-  //   setAddressData(data)
-  // }
+  const handleAddressChange = (data: ZipCodeProps) => {
+    setAddressData(data)
+    setValue('street', data.logradouro)
+    setValue('neighborhood', data.bairro)
+    setValue('city', data.localidade)
+    setValue('state', data.uf)
+  }
 
   return (
     <Container>
@@ -147,6 +152,7 @@ export function Cart() {
                 error={errors.zipCode}
                 {...register('zipCode', { valueAsNumber: true })}
                 isZipCode={true}
+                onAddressData={handleAddressChange}
               />
 
               <TextInput

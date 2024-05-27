@@ -9,11 +9,25 @@ import {
 import { FieldError } from 'react-hook-form'
 import { Box, Container, ErrorMessage } from './styles'
 
+export type ZipCodeProps = {
+  bairro: string
+  cep: string
+  complemento: string
+  ddd: string
+  gia: string
+  ibge: string
+  localidade: string
+  logradouro: string
+  siafi: string
+  uf: string
+}
+
 type Props = InputHTMLAttributes<HTMLInputElement> & {
   optional?: boolean
   containerProps?: HTMLAttributes<HTMLDivElement>
   error?: FieldError
   isZipCode?: boolean
+  onAddressData?: (data: ZipCodeProps) => void
 }
 
 export const TextInput = forwardRef(function TextInput(
@@ -24,6 +38,7 @@ export const TextInput = forwardRef(function TextInput(
     onFocus,
     onBlur,
     onChange,
+    onAddressData,
     isZipCode,
     ...rest
   }: Props,
@@ -48,13 +63,12 @@ export const TextInput = forwardRef(function TextInput(
 
     if (isZipCode && newZipCode.length === 8) {
       fetch(`https://viacep.com.br/ws/${newZipCode}/json/`)
-        .then((response) => {
-          if (response != null) {
-            console.log(response)
+        .then((response) => response.json())
+        .then((data) => {
+          if (onAddressData) {
+            onAddressData(data)
           }
-          return response.json()
         })
-        .then((data) => console.log(data))
         .catch((error) => console.log(error))
     }
     onChange?.(event)
