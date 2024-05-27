@@ -172,6 +172,33 @@ export const CheckoutButton = styled.button`
     background-color: ${({ theme }) => theme.colors['yellow-dark']};
   }
 `
+
+export const RemoveButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border: none;
+  border-radius: 0.375rem;
+  background-color: ${({ theme }) => theme.colors['base-button']};
+  color: ${({ theme }) => theme.colors['base-text']};
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
+  margin-left: 1rem; /* Adiciona espaço à esquerda */
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors['base-hover']};
+    color: ${({ theme }) => theme.colors['base-subtitle']};
+  }
+
+  span {
+    ${TextPatterns.fonts.textS}
+  }
+`
+
 export const PaymentErrorMessage = styled.p`
   ${TextPatterns.fonts.textXS}
   font-weight: 400;

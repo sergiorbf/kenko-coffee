@@ -15,6 +15,7 @@ import {
   PaymentErrorMessage,
   PaymentHeading,
   PaymentOptions,
+  RemoveButton,
 } from './styles'
 import {
   MapPin,
@@ -285,10 +286,10 @@ export function Cart() {
                         decrementQuantity={() => handleItemDecrement(coffee.id)}
                       />
 
-                      <button onClick={() => handleItemRemove(coffee.id)}>
+                      <RemoveButton onClick={() => handleItemRemove(coffee.id)}>
                         <Trash />
                         <span>Remover</span>
-                      </button>
+                      </RemoveButton>
                     </CoffeeInfo>
                   </div>
                 </div>
