@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import AsyncSelect from 'react-select/async'
 import {
   Container,
   LeftWrapper,
@@ -15,8 +16,21 @@ import {
   SelectWrapper,
 } from './styles'
 import { FaHome, FaBuilding, FaMapMarkedAlt } from 'react-icons/fa'
+
+export type CityProps = {
+  id: number
+  nome: string
+}
+
+type SelectItem = {
+  label: string
+  value: number
+}
+
 export function Expansion() {
   const [imgBase64, setImgBase64] = useState('')
+  const [selectedCity, setSelectedCity] = useState<SelectItem | null>(null)
+  const [searchTerm, setSearchTerm] = useState('')
 
   useEffect(() => {
     const fetchBase64Image = async () => {
@@ -26,6 +40,25 @@ export function Expansion() {
     }
     fetchBase64Image()
   }, [])
+
+  const loadOptions = async (inputValue: string) => {
+    try {
+      const response = await fetch(
+        `https://servicodados.ibge.gov.br/api/v1/localidades/distritos?orderBy=nome&nome=${inputValue}`,
+      )
+      const data: CityProps[] = await response.json()
+      const comboCities: SelectItem[] = data
+        .slice(0, 200)
+        .map((city: CityProps) => ({
+          label: city.nome,
+          value: city.id,
+        }))
+      return comboCities
+    } catch (error) {
+      console.error('Erro ao buscar cidades filtradas:', error)
+      return []
+    }
+  }
 
   return (
     <Container>
@@ -59,17 +92,14 @@ export function Expansion() {
           </FormGroup>
           <FormGroup>
             <label>Cidade:</label>
-            <SelectWrapper>
-              <StyledSelect id="city" name="city">
-                <option value="" disabled selected>
-                  Selecione
-                </option>
-                <option value="Itajaí">Itajaí, SC</option>
-                <option value="Balneário Camboriú">
-                  Balneário Camboriú, SC
-                </option>
-              </StyledSelect>
-            </SelectWrapper>
+            <AsyncSelect
+              value={selectedCity}
+              cacheOptions
+              defaultOptions
+              loadOptions={loadOptions}
+              onInputChange={setSearchTerm}
+              onChange={(selectedOption) => setSelectedCity(selectedOption)}
+            />
           </FormGroup>
           <FormGroup>
             <label htmlFor="capital">Qual capital para investimento:</label>
@@ -116,8 +146,8 @@ export function Expansion() {
           <Icon>
             <FaBuilding size={80} />
           </Icon>
-          <h4>+ 275 Cidades</h4>
-          <p>Nossa rede já possui franquias em mais de 275 cidades.</p>
+          <h4>+ 275 cities</h4>
+          <p>Nossa rede já possui franquias em mais de 275 cities.</p>
         </Card>
         <Card>
           <Icon>
