@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import AsyncSelect from 'react-select/async'
+import Select from 'react-select'
 import {
   Container,
   LeftWrapper,
@@ -12,10 +13,23 @@ import {
   AdditionalContent,
   Icon,
   Card,
-  StyledSelect,
-  SelectWrapper,
+  // StyledSelect,
+  // SelectWrapper,
 } from './styles'
 import { FaHome, FaBuilding, FaMapMarkedAlt } from 'react-icons/fa'
+
+const capitalOption = [
+  { value: 240, label: 'A partir de 240mil reais' },
+  { value: 570, label: 'A partir de 570mil reais' },
+]
+
+const occupationOptions = [
+  { value: 'Funcionário CLT', label: 'Funcionário CLT' },
+  { value: 'Funcionário Público', label: 'Funcionário Público' },
+  { value: 'Aposentado', label: 'Aposentado' },
+  { value: 'Investidor', label: 'Investidor' },
+  { value: 'Outro', label: 'Outro' },
+]
 
 export type CityProps = {
   id: number
@@ -44,11 +58,11 @@ export function Expansion() {
   const loadOptions = async (inputValue: string) => {
     try {
       const response = await fetch(
-        `https://servicodados.ibge.gov.br/api/v1/localidades/distritos?orderBy=nome&nome=${inputValue}`,
+        `https://servicodados.ibge.gov.br/api/v1/localidades/distritos?orderBy=nome&nome=${encodeURIComponent(inputValue)}`,
       )
       const data: CityProps[] = await response.json()
       const comboCities: SelectItem[] = data
-        .slice(0, 200)
+        // .slice(0, 200)
         .map((city: CityProps) => ({
           label: city.nome,
           value: city.id,
@@ -103,7 +117,8 @@ export function Expansion() {
           </FormGroup>
           <FormGroup>
             <label htmlFor="capital">Qual capital para investimento:</label>
-            <SelectWrapper>
+            <Select options={capitalOption} />
+            {/* <SelectWrapper>
               <StyledSelect id="capital" name="capital">
                 <option value="" disabled selected>
                   Selecione
@@ -111,11 +126,12 @@ export function Expansion() {
                 <option value="240">A partir de 240mil reais</option>
                 <option value="570">A partir de 570mil reais</option>
               </StyledSelect>
-            </SelectWrapper>
+            </SelectWrapper> */}
           </FormGroup>
           <FormGroup>
             <label htmlFor="occupation">Qual a sua ocupação atual:</label>
-            <SelectWrapper>
+            <Select options={occupationOptions} />
+            {/* <SelectWrapper>
               <StyledSelect id="occupation" name="occupation">
                 <option value="" disabled selected>
                   Selecione
@@ -129,7 +145,7 @@ export function Expansion() {
                 <option value="Investidor">Investidor</option>
                 <option value="Outro">Outro</option>
               </StyledSelect>
-            </SelectWrapper>
+            </SelectWrapper> */}
           </FormGroup>
           <Button type="submit">Quero saber mais</Button>
         </Form>
