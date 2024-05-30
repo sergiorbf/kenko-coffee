@@ -45,8 +45,8 @@ export type CityProps = {
 
 export function Expansion() {
   const [imgBase64, setImgBase64] = useState('')
-  const [ufs, setUfs] = useState<IBGEUFResponse[]>([])
-  const [cities, setCities] = useState<IBGECITYResponse[]>([])
+  const [ufs, setUfs] = useState([])
+  const [cities, setCities] = useState([])
   const [selectedUf, setSelectedUf] = useState('0')
   const [selectedCity, setSelectedCity] = useState('0')
 
