@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import Select from 'react-select'
+import Select, { SingleValue } from 'react-select'
 import {
   Container,
   LeftWrapper,
@@ -29,29 +29,41 @@ const occupationOptions = [
   { value: 'Outro', label: 'Outro' },
 ]
 
-type IBGEUFResponse = {
-  sigla: string
-  nome: string
-}
-type IBGECITYResponse = {
+type IBGEResponse = {
   id: number
   nome: string
 }
 
-export type CityProps = {
-  id: number
-  nome: string
+export type SelectOption = {
+  value: string
+  label: string
 }
 
 export function Expansion() {
   const [imgBase64, setImgBase64] = useState('')
-  const [ufs, setUfs] = useState([])
-  const [cities, setCities] = useState([])
-  const [selectedUf, setSelectedUf] = useState('0')
-  const [selectedCity, setSelectedCity] = useState('0')
+  const [ufs, setUfs] = useState<SelectOption[]>([])
+  const [cities, setCities] = useState<SelectOption[]>([])
+  const [selectedUf, setSelectedUf] = useState<SelectOption | null>(null)
+  const [selectedCity, setSelectedCity] = useState<SelectOption | null>(null)
 
   useEffect(() => {
-    if (selectedUf === '0') {
+    axios
+      .get('https://servicodados.ibge.gov.br/api/v1/localidades/estados/')
+      .then((response) => {
+        const sortedUfs = response.data
+          .map((uf: IBGEResponse) => ({
+            value: uf.id.toString(),
+            label: uf.nome,
+          }))
+          .sort((a: SelectOption, b: SelectOption) =>
+            a.label.localeCompare(b.label),
+          )
+        setUfs(sortedUfs)
+      })
+  }, [])
+
+  useEffect(() => {
+    if (!selectedUf) {
       return
     }
     axios
@@ -59,29 +71,25 @@ export function Expansion() {
         `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${selectedUf.value}/municipios`,
       )
       .then((response) => {
-        setCities(response.data)
+        const sortedCities = response.data
+          .map((city: IBGEResponse) => ({
+            value: city.id.toString(),
+            label: city.nome,
+          }))
+          .sort((a: SelectOption, b: SelectOption) =>
+            a.label.localeCompare(b.label),
+          )
+        setCities(sortedCities)
       })
   }, [selectedUf])
 
-  useEffect(() => {
-    axios
-      .get('https://servicodados.ibge.gov.br/api/v1/localidades/estados/')
-      .then((response) => {
-        setUfs(
-          response.data.map((uf: IBGEUFResponse) => ({
-            value: uf.sigla,
-            label: uf.nome,
-          })),
-        )
-      })
-  }, [])
-
-  function handleSelectUf(selectedOption) {
-    setSelectedUf(selectedOption)
+  function handleSelectUf(newValue: SingleValue<SelectOption>) {
+    setSelectedUf(newValue)
+    setSelectedCity(null)
   }
 
-  function handleSelectCity(selectedOption) {
-    setSelectedCity(selectedOption)
+  function handleSelectCity(newValue: SingleValue<SelectOption>) {
+    setSelectedCity(newValue)
   }
 
   useEffect(() => {
@@ -111,18 +119,22 @@ export function Expansion() {
           <h4>
             SAIBA COMO SER UM FRANQUEADO KENKO COFFEE E TER SUA PRÓPRIA UNIDADE
           </h4>
+
           <FormGroup>
             <label>Nome:</label>
             <Input type="text" name="name" />
           </FormGroup>
+
           <FormGroup>
             <label>Email:</label>
             <Input type="email" name="email" />
           </FormGroup>
+
           <FormGroup>
             <label>Telefone:</label>
-            <Input type="tel" name="phone" />
+            <Input type="tel" name="phone" placeholder="(DDD)" />
           </FormGroup>
+
           <FormGroup>
             <label>Estado:</label>
             <Select
@@ -132,26 +144,30 @@ export function Expansion() {
               placeholder="Selecione uma UF"
             />
           </FormGroup>
+
           <FormGroup>
             <label>Cidade:</label>
             <Select
-              options={cities.map((city: IBGECITYResponse) => ({
-                value: city.nome,
-                label: city.nome,
-              }))}
+              options={cities}
               value={selectedCity}
               onChange={handleSelectCity}
-              placeholder="Selecione uma cidade"
+              placeholder={
+                selectedUf ? 'Selecione uma cidade' : 'Selecione uma UF'
+              }
+              isDisabled={!selectedUf}
             />
           </FormGroup>
+
           <FormGroup>
             <label htmlFor="capital">Qual capital para investimento:</label>
-            <Select options={capitalOption} />
+            <Select options={capitalOption} placeholder="Selecione" />
           </FormGroup>
+
           <FormGroup>
             <label htmlFor="occupation">Qual a sua ocupação atual:</label>
-            <Select options={occupationOptions} />
+            <Select options={occupationOptions} placeholder="Selecione" />
           </FormGroup>
+
           <Button type="submit">Quero saber mais</Button>
         </Form>
       </FormWrapper>
@@ -167,8 +183,8 @@ export function Expansion() {
           <Icon>
             <FaBuilding size={80} />
           </Icon>
-          <h4>+ 275 cities</h4>
-          <p>Nossa rede já possui franquias em mais de 275 cities.</p>
+          <h4>+ 275 cidades</h4>
+          <p>Nossa rede já possui franquias em mais de 275 cidades.</p>
         </Card>
         <Card>
           <Icon>

@@ -103,7 +103,6 @@ export const Form = styled.form`
 `
 
 export const Input = styled.input`
-  margin-bottom: 10px;
   padding: 10px;
   border: 1px solid ${({ theme }) => theme.colors['brown-light']};
   border-radius: 4px;
@@ -125,6 +124,7 @@ export const Button = styled.button`
 
 export const FormGroup = styled.div`
   display: flex;
+  margin-bottom: 0.625rem;
   flex-direction: column;
   font-size: ${TextPatterns.fonts.textL};
   color: ${({ theme }) => theme.colors['base-subtitle']};
