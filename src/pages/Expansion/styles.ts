@@ -180,37 +180,3 @@ export const Icon = styled.div`
     fill: ${({ theme }) => theme.colors.yellow};
   }
 `
-
-export const SelectWrapper = styled.div`
-  position: relative;
-  display: inline-block;
-  width: 100%;
-  margin-bottom: 10px;
-
-  &::after {
-    content: '▼';
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%);
-    pointer-events: none;
-    color: ${({ theme }) => theme.colors['brown-dark']};
-  }
-`
-
-export const StyledSelect = styled.select`
-  width: 100%;
-  padding: 10px;
-  padding-right: 30px;
-  border: 1px solid ${({ theme }) => theme.colors['brown-light']};
-  border-radius: 4px;
-  color: ${({ theme }) => theme.colors['brown-dark']};
-  font-size: ${TextPatterns.fonts.textL};
-  appearance: none;
-  cursor: pointer;
-
-  &:focus {
-    outline: none;
-    border-color: ${({ theme }) => theme.colors['yellow-dark']};
-  }
-`

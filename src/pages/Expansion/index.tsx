@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import AsyncSelect from 'react-select/async'
 import Select from 'react-select'
 import {
   Container,
@@ -13,10 +12,9 @@ import {
   AdditionalContent,
   Icon,
   Card,
-  // StyledSelect,
-  // SelectWrapper,
 } from './styles'
 import { FaHome, FaBuilding, FaMapMarkedAlt } from 'react-icons/fa'
+import axios from 'axios'
 
 const capitalOption = [
   { value: 240, label: 'A partir de 240mil reais' },
@@ -31,20 +29,60 @@ const occupationOptions = [
   { value: 'Outro', label: 'Outro' },
 ]
 
+type IBGEUFResponse = {
+  sigla: string
+  nome: string
+}
+type IBGECITYResponse = {
+  id: number
+  nome: string
+}
+
 export type CityProps = {
   id: number
   nome: string
 }
 
-type SelectItem = {
-  label: string
-  value: number
-}
-
 export function Expansion() {
   const [imgBase64, setImgBase64] = useState('')
-  const [selectedCity, setSelectedCity] = useState<SelectItem | null>(null)
-  const [searchTerm, setSearchTerm] = useState('')
+  const [ufs, setUfs] = useState<IBGEUFResponse[]>([])
+  const [cities, setCities] = useState<IBGECITYResponse[]>([])
+  const [selectedUf, setSelectedUf] = useState('0')
+  const [selectedCity, setSelectedCity] = useState('0')
+
+  useEffect(() => {
+    if (selectedUf === '0') {
+      return
+    }
+    axios
+      .get(
+        `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${selectedUf.value}/municipios`,
+      )
+      .then((response) => {
+        setCities(response.data)
+      })
+  }, [selectedUf])
+
+  useEffect(() => {
+    axios
+      .get('https://servicodados.ibge.gov.br/api/v1/localidades/estados/')
+      .then((response) => {
+        setUfs(
+          response.data.map((uf: IBGEUFResponse) => ({
+            value: uf.sigla,
+            label: uf.nome,
+          })),
+        )
+      })
+  }, [])
+
+  function handleSelectUf(selectedOption) {
+    setSelectedUf(selectedOption)
+  }
+
+  function handleSelectCity(selectedOption) {
+    setSelectedCity(selectedOption)
+  }
 
   useEffect(() => {
     const fetchBase64Image = async () => {
@@ -54,25 +92,6 @@ export function Expansion() {
     }
     fetchBase64Image()
   }, [])
-
-  const loadOptions = async (inputValue: string) => {
-    try {
-      const response = await fetch(
-        `https://servicodados.ibge.gov.br/api/v1/localidades/distritos?orderBy=nome&nome=${encodeURIComponent(inputValue)}`,
-      )
-      const data: CityProps[] = await response.json()
-      const comboCities: SelectItem[] = data
-        // .slice(0, 200)
-        .map((city: CityProps) => ({
-          label: city.nome,
-          value: city.id,
-        }))
-      return comboCities
-    } catch (error) {
-      console.error('Erro ao buscar cidades filtradas:', error)
-      return []
-    }
-  }
 
   return (
     <Container>
@@ -105,47 +124,33 @@ export function Expansion() {
             <Input type="tel" name="phone" />
           </FormGroup>
           <FormGroup>
+            <label>Estado:</label>
+            <Select
+              options={ufs}
+              value={selectedUf}
+              onChange={handleSelectUf}
+              placeholder="Selecione uma UF"
+            />
+          </FormGroup>
+          <FormGroup>
             <label>Cidade:</label>
-            <AsyncSelect
+            <Select
+              options={cities.map((city: IBGECITYResponse) => ({
+                value: city.nome,
+                label: city.nome,
+              }))}
               value={selectedCity}
-              cacheOptions
-              defaultOptions
-              loadOptions={loadOptions}
-              onInputChange={setSearchTerm}
-              onChange={(selectedOption) => setSelectedCity(selectedOption)}
+              onChange={handleSelectCity}
+              placeholder="Selecione uma cidade"
             />
           </FormGroup>
           <FormGroup>
             <label htmlFor="capital">Qual capital para investimento:</label>
             <Select options={capitalOption} />
-            {/* <SelectWrapper>
-              <StyledSelect id="capital" name="capital">
-                <option value="" disabled selected>
-                  Selecione
-                </option>
-                <option value="240">A partir de 240mil reais</option>
-                <option value="570">A partir de 570mil reais</option>
-              </StyledSelect>
-            </SelectWrapper> */}
           </FormGroup>
           <FormGroup>
             <label htmlFor="occupation">Qual a sua ocupação atual:</label>
             <Select options={occupationOptions} />
-            {/* <SelectWrapper>
-              <StyledSelect id="occupation" name="occupation">
-                <option value="" disabled selected>
-                  Selecione
-                </option>
-                <option value="Empreendedor/Empresário">
-                  Empreendedor/Empresário
-                </option>
-                <option value="Funcionário CLT">Funcionário CLT</option>
-                <option value="Funcionário Público">Funcionário Público</option>
-                <option value="Aposentado">Aposentado</option>
-                <option value="Investidor">Investidor</option>
-                <option value="Outro">Outro</option>
-              </StyledSelect>
-            </SelectWrapper> */}
           </FormGroup>
           <Button type="submit">Quero saber mais</Button>
         </Form>
