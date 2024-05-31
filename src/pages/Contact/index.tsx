@@ -30,7 +30,7 @@ export function Contact() {
           <Card>
             <CardLink
               className="instagram"
-              href="https://www.instagram.com/sergiop4p"
+              href="https://www.instagram.com/sergio.rbf"
               target="_blank"
             >
               <FaInstagram size={40} />
