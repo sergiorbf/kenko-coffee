@@ -122,6 +122,7 @@ export function Cart() {
   const [addressData, setAddressData] = useState({})
 
   const handleAddressChange = (data: ZipCodeProps) => {
+    console.log(addressData)
     setAddressData(data)
     setValue('street', data.logradouro)
     setValue('neighborhood', data.bairro)

@@ -72,7 +72,7 @@ export function cartReducer(state: CartState, action: Actions) {
         draft.orders.push(newOrder)
         draft.cart = []
 
-        action.payload.callback(`/order/${newOrder.id}/success}`)
+        action.payload.callback(`/order/${newOrder.id}/checkout}`)
       })
     default:
       return state

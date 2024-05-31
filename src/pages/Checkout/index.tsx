@@ -1,9 +1,24 @@
 import { CurrencyDollar, MapPin, Timer } from '@phosphor-icons/react'
 import { Container, Heading, Info, InfoContent, Order } from './styles'
 import { useTheme } from 'styled-components'
+import { useCart } from '../../Hooks/useCart'
+import { useParams } from 'react-router-dom'
 
 export function Checkout() {
   const theme = useTheme()
+  const { orders } = useCart()
+  const { orderId } = useParams()
+  const orderInfo = orders.find((order) => order.id === Number(orderId))
+  const paymentMethod = {
+    credit: 'Cartão de crédito',
+    debit: 'Cartão de débito',
+    cash: 'Dinheiro',
+    pix: 'PIX',
+  }
+
+  if (!orderInfo?.id) {
+    return null
+  }
 
   return (
     <Container>
@@ -26,10 +41,15 @@ export function Checkout() {
 
               <div>
                 <span>
-                  Entrega em <strong></strong>
+                  Entrega em{' '}
+                  <strong>
+                    {orderInfo.street}, {orderInfo.number}
+                  </strong>
                 </span>
 
-                <span></span>
+                <span>
+                  {orderInfo.neighborhood} - {orderInfo.city},{orderInfo.state}
+                </span>
               </div>
             </div>
 
@@ -37,7 +57,7 @@ export function Checkout() {
               <Timer
                 size={32}
                 color={theme.colors.white}
-                style={{ backgroundColor: theme.colors.brown }}
+                style={{ backgroundColor: theme.colors.yellow }}
               />
 
               <div>
@@ -51,13 +71,13 @@ export function Checkout() {
               <CurrencyDollar
                 size={32}
                 color={theme.colors.white}
-                style={{ backgroundColor: theme.colors.brown }}
+                style={{ backgroundColor: theme.colors['yellow-dark'] }}
               />
 
               <div>
                 <span>Pagamento na entrega</span>
 
-                <strong></strong>
+                <strong>{paymentMethod[orderInfo.paymentMethod]}</strong>
               </div>
             </div>
           </InfoContent>
