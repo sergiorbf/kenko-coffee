@@ -1,4 +1,10 @@
-import { ReactNode, createContext, useReducer } from 'react'
+import {
+  ReactNode,
+  createContext,
+  useEffect,
+  useReducer,
+  useState,
+} from 'react'
 import { Item, Order, cartReducer } from '../reducers/cart/reducer'
 import { OrderInfo } from '../pages/Cart'
 import {
@@ -13,11 +19,13 @@ import { useNavigate } from 'react-router-dom'
 interface MarketContextType {
   cart: Item[]
   orders: Order[]
+  location: { latitude: number; longitude: number }
   addItem: (item: Item) => void
   removeItem: (itemId: Item['id']) => void
   decrementItemQuantity: (itemId: Item['id']) => void
   incrementItemQuantity: (itemId: Item['id']) => void
   checkout: (order: OrderInfo) => void
+  error: string
 }
 
 export const MarketContext = createContext({} as MarketContextType)
@@ -27,6 +35,27 @@ interface MarketContextProps {
 }
 
 export function MarketContextProvider({ children }: MarketContextProps) {
+  const [location, setLocation] = useState({ latitude: 0, longitude: 0 })
+  const [error, setError] = useState('')
+
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setLocation({
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+          })
+        },
+        (error) => {
+          setError(error.message)
+        },
+      )
+    } else {
+      setError('Geolocation is not supported by this browser.')
+    }
+  }, [])
+
   const [cartState, dispatch] = useReducer(
     cartReducer,
     {
@@ -80,6 +109,8 @@ export function MarketContextProvider({ children }: MarketContextProps) {
         incrementItemQuantity,
         removeItem,
         checkout,
+        location,
+        error,
       }}
     >
       {children}

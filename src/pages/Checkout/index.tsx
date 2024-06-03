@@ -43,7 +43,7 @@ export function Checkout() {
                 <span>
                   Entrega em{' '}
                   <strong>
-                    {orderInfo.street}, {orderInfo.number}
+                    {orderInfo.street}, {orderInfo.number + ' '}
                   </strong>
                 </span>
 
@@ -75,7 +75,7 @@ export function Checkout() {
               />
 
               <div>
-                <span>Pagamento na entrega</span>
+                <span>Pagamento na entrega </span>
 
                 <strong>{paymentMethod[orderInfo.paymentMethod]}</strong>
               </div>
