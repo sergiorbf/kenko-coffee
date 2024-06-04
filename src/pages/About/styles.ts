@@ -50,7 +50,7 @@ export const Text = styled.p`
   max-width: 800px;
 `
 
-export const Button = styled.button`
+export const Button = styled.a`
   padding: 12px;
   background-color: ${({ theme }) => theme.colors.yellow};
   color: ${({ theme }) => theme.colors['brown-dark']};
@@ -58,7 +58,7 @@ export const Button = styled.button`
   border-radius: 4px;
   cursor: pointer;
   font-size: ${TextPatterns.fonts.textL};
-
+  text-decoration: none;
   &:hover {
     background-color: ${({ theme }) => theme.colors['yellow-dark']};
   }

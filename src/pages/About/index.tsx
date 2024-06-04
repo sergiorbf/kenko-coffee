@@ -48,7 +48,9 @@ export function About() {
         <br />
         Este é o Empório Catarinense Kenko Coffee.
       </Text>
-      <Button>Quero saber mais sobre a franquia</Button>
+      <Button href="/expansion" target="_blank" rel="noreferrer">
+        Quero saber mais sobre a franquia
+      </Button>
     </Container>
   )
 }

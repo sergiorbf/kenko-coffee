@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import Select, { SingleValue } from 'react-select'
+import emailjs from 'emailjs-com'
 import {
   Container,
   LeftWrapper,
@@ -15,10 +16,11 @@ import {
 } from './styles'
 import { FaHome, FaBuilding, FaMapMarkedAlt } from 'react-icons/fa'
 import axios from 'axios'
+import { z } from 'zod'
 
 const capitalOption = [
-  { value: 240, label: 'A partir de 240mil reais' },
-  { value: 570, label: 'A partir de 570mil reais' },
+  { value: '240', label: 'A partir de 240mil reais' },
+  { value: '570', label: 'A partir de 570mil reais' },
 ]
 
 const occupationOptions = [
@@ -39,12 +41,31 @@ export type SelectOption = {
   label: string
 }
 
+const newMailSchema = z.object({
+  name: z.string().min(1, 'Informe o seu nome'),
+  email: z.string().email('Informe um e-mail válido'),
+  phone: z.string().min(1, 'Informe o número do celular'),
+  state: z.string().min(1, 'Informe a UF'),
+  city: z.string().min(1, 'Informe a cidade'),
+  capitalInvest: z.string().min(1, 'Informe o capital'),
+  occupation: z.string().min(1, 'Informe a sua ocupação'),
+})
+
 export function Expansion() {
   const [imgBase64, setImgBase64] = useState('')
   const [ufs, setUfs] = useState<SelectOption[]>([])
   const [cities, setCities] = useState<SelectOption[]>([])
   const [selectedUf, setSelectedUf] = useState<SelectOption | null>(null)
   const [selectedCity, setSelectedCity] = useState<SelectOption | null>(null)
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    state: '',
+    city: '',
+    capitalInvest: '',
+    occupation: '',
+  })
 
   useEffect(() => {
     axios
@@ -86,10 +107,16 @@ export function Expansion() {
   function handleSelectUf(newValue: SingleValue<SelectOption>) {
     setSelectedUf(newValue)
     setSelectedCity(null)
+    setFormData({
+      ...formData,
+      state: newValue ? newValue.label : '',
+      city: '',
+    })
   }
 
   function handleSelectCity(newValue: SingleValue<SelectOption>) {
     setSelectedCity(newValue)
+    setFormData({ ...formData, city: newValue ? newValue.label : '' })
   }
 
   useEffect(() => {
@@ -100,6 +127,39 @@ export function Expansion() {
     }
     fetchBase64Image()
   }, [])
+
+  function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const { name, value } = e.target
+    setFormData({ ...formData, [name]: value })
+  }
+
+  function handleSelectChange(name: string, value: SingleValue<SelectOption>) {
+    setFormData({ ...formData, [name]: value ? value.label : '' })
+  }
+
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault()
+
+    const result = newMailSchema.safeParse(formData)
+
+    if (!result.success) {
+      alert('Por favor, preencha todos os campos corretamente.')
+      return
+    }
+
+    emailjs
+      .send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', formData, 'YOUR_USER_ID')
+      .then(
+        (result) => {
+          console.log(result.text)
+          alert('Email enviado com sucesso!')
+        },
+        (error) => {
+          console.log(error.text)
+          alert('Erro ao enviar email. Tente novamente mais tarde.')
+        },
+      )
+  }
 
   return (
     <Container>
@@ -115,24 +175,40 @@ export function Expansion() {
       </LeftWrapper>
 
       <FormWrapper>
-        <Form>
+        <Form onSubmit={handleSubmit}>
           <h4>
             SAIBA COMO SER UM FRANQUEADO KENKO COFFEE E TER SUA PRÓPRIA UNIDADE
           </h4>
 
           <FormGroup>
             <label>Nome:</label>
-            <Input type="text" name="name" />
+            <Input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleInputChange}
+            />
           </FormGroup>
 
           <FormGroup>
             <label>Email:</label>
-            <Input type="email" name="email" />
+            <Input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleInputChange}
+            />
           </FormGroup>
 
           <FormGroup>
             <label>Telefone:</label>
-            <Input type="tel" name="phone" placeholder="(DDD)" />
+            <Input
+              type="tel"
+              name="phone"
+              value={formData.phone}
+              onChange={handleInputChange}
+              placeholder="(DDD)"
+            />
           </FormGroup>
 
           <FormGroup>
@@ -140,8 +216,9 @@ export function Expansion() {
             <Select
               options={ufs}
               value={selectedUf}
-              onChange={handleSelectUf}
+              onChange={(value) => handleSelectUf(value)}
               placeholder="Selecione uma UF"
+              name="state"
             />
           </FormGroup>
 
@@ -150,22 +227,33 @@ export function Expansion() {
             <Select
               options={cities}
               value={selectedCity}
-              onChange={handleSelectCity}
+              onChange={(value) => handleSelectCity(value)}
               placeholder={
                 selectedUf ? 'Selecione uma cidade' : 'Selecione uma UF'
               }
               isDisabled={!selectedUf}
+              name="city"
             />
           </FormGroup>
 
           <FormGroup>
             <label htmlFor="capital">Qual capital para investimento:</label>
-            <Select options={capitalOption} placeholder="Selecione" />
+            <Select
+              options={capitalOption}
+              placeholder="Selecione"
+              name="capitalInvest"
+              onChange={(value) => handleSelectChange('capitalInvest', value)}
+            />
           </FormGroup>
 
           <FormGroup>
             <label htmlFor="occupation">Qual a sua ocupação atual:</label>
-            <Select options={occupationOptions} placeholder="Selecione" />
+            <Select
+              options={occupationOptions}
+              placeholder="Selecione"
+              name="occupation"
+              onChange={(value) => handleSelectChange('occupation', value)}
+            />
           </FormGroup>
 
           <Button type="submit">Quero saber mais</Button>

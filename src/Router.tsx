@@ -18,8 +18,8 @@ export function Router() {
         <Route path="/contact" element={<Contact />}></Route>
         <Route path="/cart" element={<Cart />}></Route>
         <Route path="/order/:orderId/checkout" element={<Checkout />}></Route>
-        <Route path="/expansion" element={<Expansion />}></Route>
       </Route>
+      <Route path="/expansion" element={<Expansion />}></Route>
     </Routes>
   )
 }
