@@ -1,4 +1,13 @@
-import { Container, Title, Text, Button } from './styles'
+import { FaBuilding, FaHome, FaMapMarkedAlt } from 'react-icons/fa'
+import {
+  Container,
+  Title,
+  Text,
+  Button,
+  AdditionalContent,
+  Card,
+  Icon,
+} from './styles'
 
 export function About() {
   return (
@@ -48,6 +57,29 @@ export function About() {
         <br />
         Este é o Empório Catarinense Kenko Coffee.
       </Text>
+      <AdditionalContent>
+        <Card>
+          <Icon>
+            <FaHome size={80} />
+          </Icon>
+          <h4>+660 Franquias</h4>
+          <p>Somos mais de 660 franquias espalhadas em todos os estados.</p>
+        </Card>
+        <Card>
+          <Icon>
+            <FaBuilding size={80} />
+          </Icon>
+          <h4>+ 275 cidades</h4>
+          <p>Nossa rede já possui franquias em mais de 275 cidades.</p>
+        </Card>
+        <Card>
+          <Icon>
+            <FaMapMarkedAlt size={80} />
+          </Icon>
+          <h4>27 Estados</h4>
+          <p>Presentes em todos os estados do Brasil e o Distrito Federal.</p>
+        </Card>
+      </AdditionalContent>
       <Button href="/expansion" target="_blank" rel="noreferrer">
         Quero saber mais sobre a franquia
       </Button>

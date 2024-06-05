@@ -187,7 +187,7 @@ export const RemoveButton = styled.button`
   transition:
     background-color 0.2s,
     color 0.2s;
-  margin-left: 1rem; /* Adiciona espaço à esquerda */
+  margin-left: 1rem;
 
   &:hover {
     background-color: ${({ theme }) => theme.colors['base-hover']};

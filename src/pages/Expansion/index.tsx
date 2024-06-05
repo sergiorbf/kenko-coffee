@@ -10,11 +10,7 @@ import {
   Input,
   Button,
   FormGroup,
-  AdditionalContent,
-  Icon,
-  Card,
 } from './styles'
-import { FaHome, FaBuilding, FaMapMarkedAlt } from 'react-icons/fa'
 import axios from 'axios'
 import { z } from 'zod'
 
@@ -259,29 +255,6 @@ export function Expansion() {
           <Button type="submit">Quero saber mais</Button>
         </Form>
       </FormWrapper>
-      <AdditionalContent>
-        <Card>
-          <Icon>
-            <FaHome size={80} />
-          </Icon>
-          <h4>+660 Franquias</h4>
-          <p>Somos mais de 660 franquias espalhadas em todos os estados.</p>
-        </Card>
-        <Card>
-          <Icon>
-            <FaBuilding size={80} />
-          </Icon>
-          <h4>+ 275 cidades</h4>
-          <p>Nossa rede já possui franquias em mais de 275 cidades.</p>
-        </Card>
-        <Card>
-          <Icon>
-            <FaMapMarkedAlt size={80} />
-          </Icon>
-          <h4>27 Estados</h4>
-          <p>Presentes em todos os estados do Brasil e o Distrito Federal.</p>
-        </Card>
-      </AdditionalContent>
     </Container>
   )
 }

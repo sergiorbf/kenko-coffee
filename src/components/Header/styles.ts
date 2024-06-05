@@ -4,15 +4,23 @@ import { TextPatterns } from '../../styles/TextPatterns'
 export const HeaderContainer = styled.header`
   max-width: 100%;
   padding: 32px 20px;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
-`
 
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    padding: 20px;
+  }
+`
 export const NavLinks = styled.nav`
   display: flex;
   gap: 16px;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    margin-top: 20px;
+  }
 
   a {
     display: flex;
@@ -24,6 +32,10 @@ export const NavLinks = styled.nav`
 
     &:hover {
       color: ${({ theme }) => theme.colors['base-hover']};
+    }
+
+    @media screen and (max-width: 768px) {
+      margin-bottom: 10px;
     }
   }
 
@@ -39,6 +51,10 @@ export const Aside = styled.aside`
   display: flex;
   align-items: center;
   gap: 12px;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
 
   div {
     display: flex;
@@ -114,5 +130,9 @@ export const FranchiseButton = styled.button`
 
   &:hover {
     background-color: ${({ theme }) => theme.colors['base-button-hover']};
+  }
+
+  @media screen and (max-width: 768px) {
+    margin-top: 20px;
   }
 `

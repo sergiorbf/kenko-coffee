@@ -26,6 +26,11 @@ export const Container = styled.div`
 
   @media (min-width: 768px) {
     flex-direction: row;
+    padding: 40px;
+  }
+
+  @media (min-width: 1024px) {
+    padding: 60px;
   }
 `
 
@@ -42,7 +47,12 @@ export const LeftWrapper = styled.div`
     align-items: center;
     text-align: center;
   }
+
+  @media (min-width: 1024px) {
+    margin-left: 8rem;
+  }
 `
+
 export const TextWrapper = styled.div`
   margin-top: 20px;
   text-align: left;
@@ -65,7 +75,18 @@ export const TextWrapper = styled.div`
       ${TextPatterns.fonts.titleL}
     }
   }
+
+  @media (max-width: 1024px) {
+    > h1 {
+      font-size: 2.5rem;
+    }
+
+    > p {
+      font-size: 1.25rem;
+    }
+  }
 `
+
 export const FormWrapper = styled.div`
   display: flex;
   justify-content: center;
@@ -80,6 +101,15 @@ export const FormWrapper = styled.div`
     width: 100%;
     padding: 0 20px;
   }
+
+  @media (min-width: 769px) {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  @media (min-width: 1024px) {
+    margin-left: 40px;
+  }
 `
 
 export const Form = styled.form`
@@ -91,21 +121,40 @@ export const Form = styled.form`
   background-color: ${({ theme }) => theme.colors['yellow-light']};
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
+  overflow-y: auto;
 
   > h4 {
     ${TextPatterns.fonts.titleL}
     color: ${({ theme }) => theme.colors['base-subtitle']}
   }
 
-  @media (max-width: 768px) {
-    width: 100%;
+  @media (max-width: 1366px) {
+    max-height: 500px;
+  }
+
+  @media (min-width: 1024px) {
+    max-width: 600px;
+    max-height: auto;
+    padding: 30px;
+    font-size: 1.25rem;
   }
 `
 
 export const Input = styled.input`
-  padding: 10px;
+  padding: 0.625rem;
+  height: 2.375rem;
   border: 1px solid ${({ theme }) => theme.colors['brown-light']};
   border-radius: 4px;
+  margin-bottom: 10px;
+
+  @media (max-width: 768px) {
+    padding: 12px;
+  }
+
+  @media (min-width: 1024px) {
+    padding: 14px;
+    font-size: 1.125rem;
+  }
 `
 
 export const Button = styled.button`
@@ -120,6 +169,15 @@ export const Button = styled.button`
   &:hover {
     background-color: ${({ theme }) => theme.colors['yellow-dark']};
   }
+
+  @media (max-width: 768px) {
+    padding: 14px;
+  }
+
+  @media (min-width: 1024px) {
+    padding: 16px;
+    font-size: 1.125rem;
+  }
 `
 
 export const FormGroup = styled.div`
@@ -128,55 +186,9 @@ export const FormGroup = styled.div`
   flex-direction: column;
   font-size: ${TextPatterns.fonts.textL};
   color: ${({ theme }) => theme.colors['base-subtitle']};
-`
 
-export const AdditionalContent = styled.div`
-  position: absolute;
-  top: 100%;
-  color: ${({ theme }) => theme.colors['base-title']};
-  padding: 20px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-
-  @media (max-width: 768px) {
-    position: static;
-    padding: 20px 0;
-  }
-`
-
-export const Card = styled.div`
-  width: 300px;
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s ease;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-
-  &:hover {
-    background-color: ${({ theme }) => theme.colors['yellow-light']};
-    cursor: pointer;
-  }
-
-  > h4 {
-    ${TextPatterns.fonts.titleL}
-    color: ${({ theme }) => theme.colors['base-subtitle']}
-  }
-
-  p {
-    ${TextPatterns.fonts.textL}
-    color: ${({ theme }) => theme.colors['base-subtitle']};
-  }
-`
-
-export const Icon = styled.div`
-  font-size: 24px;
-  margin-bottom: 10px;
-
-  svg {
-    fill: ${({ theme }) => theme.colors.yellow};
+  @media (min-width: 1024px) {
+    margin-bottom: 1rem;
+    font-size: 1.125rem;
   }
 `

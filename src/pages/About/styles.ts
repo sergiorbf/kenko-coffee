@@ -63,3 +63,52 @@ export const Button = styled.a`
     background-color: ${({ theme }) => theme.colors['yellow-dark']};
   }
 `
+export const AdditionalContent = styled.div`
+  top: 100%;
+  color: ${({ theme }) => theme.colors['base-title']};
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+
+  @media (max-width: 768px) {
+    position: static;
+    padding: 20px 0;
+  }
+`
+
+export const Card = styled.div`
+  width: 250px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors['yellow-light']};
+    cursor: pointer;
+  }
+
+  > h4 {
+    ${TextPatterns.fonts.titleL}
+    color: ${({ theme }) => theme.colors['base-subtitle']}
+  }
+
+  p {
+    ${TextPatterns.fonts.textL}
+    color: ${({ theme }) => theme.colors['base-subtitle']};
+  }
+`
+
+export const Icon = styled.div`
+  font-size: 24px;
+  margin-bottom: 10px;
+
+  svg {
+    fill: ${({ theme }) => theme.colors.yellow};
+  }
+`
