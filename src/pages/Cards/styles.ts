@@ -11,12 +11,22 @@ export const Container = styled.div`
   flex-direction: column;
 
   text-align: center;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    padding: 0 10px 10px;
+  }
 `
 export const CoffeeImg = styled.img`
   margin-top: -20px;
   max-width: 120px;
   max-height: 120px;
   align-self: center;
+
+  @media (max-width: 768px) {
+    max-width: 100px;
+    max-height: 100px;
+  }
 `
 export const Tags = styled.div`
   margin-top: 12px;
@@ -33,27 +43,44 @@ export const Tags = styled.div`
     color: ${({ theme }) => theme.colors['yellow-dark']};
     text-transform: uppercase;
     ${TextPatterns.fonts.tag}
+
+    @media (max-width: 768px) {
+      padding: 2px 4px;
+      font-size: 12px;
+    }
   }
 `
 export const Title = styled.h3`
   margin-top: 16px;
   ${TextPatterns.fonts.titleS}
   color: ${({ theme }) => theme.colors['base-subtitle']};
+
+  @media (max-width: 768px) {
+    margin-top: 8px;
+    font-size: 18px;
+  }
 `
 export const Description = styled.span`
   margin-top: 8px;
   width: 100%;
   ${TextPatterns.fonts.textS}
   color: ${({ theme }) => theme.colors['base-label']};
-`
 
+  @media (max-width: 768px) {
+    font-size: 14px;
+  }
+`
 export const CartControl = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-around;
   margin-top: 4px;
-`
 
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 8px;
+  }
+`
 export const Price = styled.div`
   display: flex;
   align-items: baseline;
@@ -62,11 +89,19 @@ export const Price = styled.div`
   span:first-child {
     ${TextPatterns.fonts.textS};
     color: ${({ theme }) => theme.colors['base-text']};
+
+    @media (max-width: 768px) {
+      font-size: 14px;
+    }
   }
 
   span:last-child {
     ${TextPatterns.fonts.titleM};
     color: ${({ theme }) => theme.colors['base-text']};
+
+    @media (max-width: 768px) {
+      font-size: 18px;
+    }
   }
 `
 export const Order = styled.div<{ $itemAdded?: boolean }>`
@@ -100,6 +135,10 @@ export const Order = styled.div<{ $itemAdded?: boolean }>`
 
     svg {
       transition: color 0.2s ease;
+    }
+
+    @media (max-width: 768px) {
+      padding: 6px;
     }
   }
 `
