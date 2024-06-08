@@ -20,6 +20,22 @@ export const HomeContent = styled.div`
     flex-direction: column;
     gap: 66px;
   }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 32px;
+
+    > div {
+      gap: 32px;
+    }
+  }
 `
 
 export const TitleContainer = styled.div`
@@ -41,6 +57,16 @@ export const TitleContainer = styled.div`
     ${TextPatterns.fonts.textL}
     color: ${({ theme }) => theme.colors['base-subtitle']}
   }
+
+  @media (max-width: 768px) {
+    > h1 {
+      font-size: 1.5rem;
+    }
+
+    > h2 {
+      font-size: 1.25rem;
+    }
+  }
 `
 
 export const Info = styled.div`
@@ -57,5 +83,10 @@ export const Info = styled.div`
       padding: 8px;
       border-radius: 999px;
     }
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    grid-gap: 16px;
   }
 `

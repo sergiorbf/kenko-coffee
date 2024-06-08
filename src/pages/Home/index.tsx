@@ -10,7 +10,7 @@ export function Home() {
         <HomeContent>
           <div>
             <TitleContainer>
-              <h1> Desperte seus sentidos com o aroma KENKO!!!</h1>
+              <h1>Desperte seus sentidos com o aroma KENKO!!!</h1>
               <h2>
                 Com o Kenko Coffee Delivery você recebe seu café onde estiver, a
                 qualquer hora.
