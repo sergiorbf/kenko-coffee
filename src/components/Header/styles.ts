@@ -20,6 +20,8 @@ export const NavLinks = styled.nav`
   @media screen and (max-width: 768px) {
     flex-direction: column;
     margin-top: 20px;
+    width: 100%;
+    align-items: center;
   }
 
   a {
@@ -36,6 +38,8 @@ export const NavLinks = styled.nav`
 
     @media screen and (max-width: 768px) {
       margin-bottom: 10px;
+      width: 100%;
+      justify-content: center;
     }
   }
 
@@ -54,6 +58,8 @@ export const Aside = styled.aside`
 
   @media screen and (max-width: 768px) {
     flex-direction: column;
+    gap: 16px;
+    width: 100%;
   }
 
   div {
@@ -75,6 +81,11 @@ export const Aside = styled.aside`
 
     span {
       color: ${({ theme }) => theme.colors['brown-light']};
+    }
+
+    @media screen and (max-width: 768px) {
+      width: 100%;
+      justify-content: center;
     }
   }
 
@@ -107,6 +118,11 @@ export const Aside = styled.aside`
       right: 0px;
       transform: translate(50%, -50%);
     }
+
+    @media screen and (max-width: 768px) {
+      width: 100%;
+      justify-content: center;
+    }
   }
 `
 
@@ -134,5 +150,7 @@ export const FranchiseButton = styled.button`
 
   @media screen and (max-width: 768px) {
     margin-top: 20px;
+    width: 100%;
+    justify-content: center;
   }
 `
