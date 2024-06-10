@@ -24,6 +24,10 @@ export const Container = styled.div`
     z-index: 1;
   }
 
+  @media (min-width: 480px) {
+    padding: 30px;
+  }
+
   @media (min-width: 768px) {
     flex-direction: row;
     padding: 40px;
@@ -46,6 +50,10 @@ export const LeftWrapper = styled.div`
     margin-left: 0;
     align-items: center;
     text-align: center;
+  }
+
+  @media (min-width: 480px) {
+    margin-left: 2rem;
   }
 
   @media (min-width: 1024px) {
@@ -83,6 +91,16 @@ export const TextWrapper = styled.div`
 
     > p {
       font-size: 1.25rem;
+    }
+  }
+
+  @media (min-width: 480px) {
+    > h1 {
+      font-size: 2rem;
+    }
+
+    > p {
+      font-size: 1rem;
     }
   }
 `
