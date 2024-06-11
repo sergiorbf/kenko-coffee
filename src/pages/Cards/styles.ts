@@ -12,6 +12,16 @@ export const Container = styled.div`
 
   text-align: center;
 
+  @media (max-width: 1200px) {
+    width: 220px;
+    padding: 0 15px 15px;
+  }
+
+  @media (max-width: 992px) {
+    width: 180px;
+    padding: 0 10px 10px;
+  }
+
   @media (max-width: 768px) {
     width: 100%;
     padding: 0 10px 10px;
@@ -23,9 +33,19 @@ export const CoffeeImg = styled.img`
   max-height: 120px;
   align-self: center;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1200px) {
     max-width: 100px;
     max-height: 100px;
+  }
+
+  @media (max-width: 992px) {
+    max-width: 80px;
+    max-height: 80px;
+  }
+
+  @media (max-width: 768px) {
+    max-width: 60px;
+    max-height: 60px;
   }
 `
 export const Tags = styled.div`
@@ -44,6 +64,16 @@ export const Tags = styled.div`
     text-transform: uppercase;
     ${TextPatterns.fonts.tag}
 
+    @media (max-width: 1200px) {
+      padding: 3px 6px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 992px) {
+      padding: 2px 5px;
+      font-size: 13px;
+    }
+
     @media (max-width: 768px) {
       padding: 2px 4px;
       font-size: 12px;
@@ -55,9 +85,19 @@ export const Title = styled.h3`
   ${TextPatterns.fonts.titleS}
   color: ${({ theme }) => theme.colors['base-subtitle']};
 
+  @media (max-width: 1200px) {
+    margin-top: 12px;
+    font-size: 20px;
+  }
+
+  @media (max-width: 992px) {
+    margin-top: 10px;
+    font-size: 18px;
+  }
+
   @media (max-width: 768px) {
     margin-top: 8px;
-    font-size: 18px;
+    font-size: 16px;
   }
 `
 export const Description = styled.span`
@@ -65,6 +105,14 @@ export const Description = styled.span`
   width: 100%;
   ${TextPatterns.fonts.textS}
   color: ${({ theme }) => theme.colors['base-label']};
+
+  @media (max-width: 1200px) {
+    font-size: 16px;
+  }
+
+  @media (max-width: 992px) {
+    font-size: 15px;
+  }
 
   @media (max-width: 768px) {
     font-size: 14px;
@@ -75,6 +123,16 @@ export const CartControl = styled.div`
   align-items: center;
   justify-content: space-around;
   margin-top: 4px;
+
+  @media (max-width: 1200px) {
+    flex-direction: row;
+    gap: 8px;
+  }
+
+  @media (max-width: 992px) {
+    flex-direction: row;
+    gap: 6px;
+  }
 
   @media (max-width: 768px) {
     flex-direction: column;
@@ -90,6 +148,14 @@ export const Price = styled.div`
     ${TextPatterns.fonts.textS};
     color: ${({ theme }) => theme.colors['base-text']};
 
+    @media (max-width: 1200px) {
+      font-size: 16px;
+    }
+
+    @media (max-width: 992px) {
+      font-size: 15px;
+    }
+
     @media (max-width: 768px) {
       font-size: 14px;
     }
@@ -99,8 +165,16 @@ export const Price = styled.div`
     ${TextPatterns.fonts.titleM};
     color: ${({ theme }) => theme.colors['base-text']};
 
-    @media (max-width: 768px) {
+    @media (max-width: 1200px) {
+      font-size: 20px;
+    }
+
+    @media (max-width: 992px) {
       font-size: 18px;
+    }
+
+    @media (max-width: 768px) {
+      font-size: 16px;
     }
   }
 `
@@ -135,6 +209,14 @@ export const Order = styled.div<{ $itemAdded?: boolean }>`
 
     svg {
       transition: color 0.2s ease;
+    }
+
+    @media (max-width: 1200px) {
+      padding: 6px;
+    }
+
+    @media (max-width: 992px) {
+      padding: 4px;
     }
 
     @media (max-width: 768px) {
