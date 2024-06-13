@@ -7,6 +7,12 @@ export const Container = styled.div`
   padding: 40px 20px;
   margin: 0 auto;
   gap: 32px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    padding: 20px 10px;
+    gap: 16px;
+  }
 `
 
 export const InfoContainer = styled.div`
@@ -25,6 +31,7 @@ export const InfoContainer = styled.div`
     gap: 32px;
   }
 `
+
 export const FormsContainer = styled.div`
   padding: 40px;
   border-radius: 6px;
@@ -35,6 +42,11 @@ export const FormsContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;
+
+  @media (max-width: 768px) {
+    padding: 20px;
+    min-width: unset;
+  }
 `
 
 export const AddressContainer = styled(FormsContainer)``
@@ -59,6 +71,7 @@ export const AddressHeading = styled(Heading)`
     color: ${({ theme }) => theme.colors['yellow-dark']};
   }
 `
+
 export const AddressForm = styled.div`
   display: grid;
   grid-template-areas:
@@ -68,7 +81,20 @@ export const AddressForm = styled.div`
     'neighborhood city state';
   grid-template-columns: 12.5rem 1fr 3.75rem;
   grid-gap: 2rem 0.75rem;
+
+  @media (max-width: 768px) {
+    grid-template-areas:
+      'zipCode'
+      'street'
+      'number'
+      'fullAddress'
+      'neighborhood'
+      'city'
+      'state';
+    grid-template-columns: 1fr;
+  }
 `
+
 export const PaymentContainer = styled(FormsContainer)``
 
 export const PaymentHeading = styled(Heading)`
@@ -76,6 +102,7 @@ export const PaymentHeading = styled(Heading)`
     color: ${({ theme }) => theme.colors.brown};
   }
 `
+
 export const PaymentOptions = styled.div`
   display: flex;
   flex-direction: column;
@@ -86,8 +113,13 @@ export const PaymentOptions = styled.div`
     align-items: center;
     justify-content: space-between;
     gap: 0.75rem;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+    }
   }
 `
+
 export const Coffee = styled.div`
   display: flex;
   justify-content: space-between;
@@ -112,7 +144,19 @@ export const Coffee = styled.div`
   > aside {
     font-weight: bold;
   }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+
+    > div {
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+  }
 `
+
 export const CartTotal = styled.div`
   width: 100%;
   padding: 2.5rem;
@@ -126,7 +170,13 @@ export const CartTotal = styled.div`
     background-color: ${({ theme }) => theme.colors['base-button']};
     margin: 1.5rem 0;
   }
+
+  @media (max-width: 768px) {
+    padding: 1.5rem;
+    min-width: unset;
+  }
 `
+
 export const CartTotalInfo = styled.div`
   display: flex;
   flex-direction: column;
@@ -153,9 +203,16 @@ export const CartTotalInfo = styled.div`
     }
   }
 `
+
 export const CoffeeInfo = styled.div`
   display: flex;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `
+
 export const CheckoutButton = styled.button`
   width: 100%;
   text-transform: uppercase;
